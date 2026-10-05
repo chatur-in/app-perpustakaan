@@ -6,22 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('loan_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('loan_id')->constrained('loans')->onDelete('cascade');
-            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
+            $table->foreignId('loan_id')->constrained('loans');
+            $table->foreignId('book_id')->constrained('books');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('loan_items');
