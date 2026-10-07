@@ -11,7 +11,8 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::paginate(10);
+        // Menggunakan Eager Loading with('category') untuk mencegah N+1 Query
+        $books = Book::with('category')->paginate(10);
 
         return view('books.index', compact('books'));
     }
@@ -35,7 +36,8 @@ class BookController extends Controller
 
     public function show(string $id)
     {
-        $book = Book::findOrFail($id);
+        // Menggunakan Eager Loading with('category')
+        $book = Book::with('category')->findOrFail($id);
 
         return view('books.show', compact('book'));
     }
